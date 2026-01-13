@@ -1,0 +1,34 @@
+.top-toolbar {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.app-name {
+  font-size: 18px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.right-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.date {
+  font-size: 14px;
+  margin-right: 16px;
+  white-space: nowrap;
+}
+
+.streak {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
