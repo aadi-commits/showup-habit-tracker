@@ -1,0 +1,32 @@
+<!-- <p>horizontal-calendar works!</p> -->
+<mat-card class="calendar-card">
+    <mat-card-title class="month-title">
+        {{ selectedDate | date:'MMMM yyyy' }}
+    </mat-card-title>
+
+    <mat-card-content>
+        <div class="calendar-scroll">
+            @for (d of days; track d.date) {
+                <button
+                    mat-button
+                    class="day-btn"
+                    [class.today]="d.isToday"
+                    [class.completed]="d.isCompleted"
+                    [class.selected]="d.date.toDateString() === selectedDate.toDateString()"
+                    (click)="select(d)"
+                >
+                    <div class="day-date">
+                        <span class="day-name">{{ d.date | date:'EEE' }}</span>
+                        <span class="day-number">{{ d.day }}</span>
+                        @if (d.isCompleted) {
+                            <mat-icon fontIcon="check"></mat-icon>
+                        }
+                    </div>
+                    
+                </button>
+            }
+            
+
+        </div>
+    </mat-card-content>
+</mat-card>
