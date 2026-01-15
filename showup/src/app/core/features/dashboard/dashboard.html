@@ -6,5 +6,9 @@
 
 <app-today-status [isCompletedToday]="isCompletedSelectedDate"></app-today-status>
 
-<app-daily-checkin [isCompleted]="isCompletedSelectedDate" (markDone)="onMarkDone()">
+<app-daily-checkin
+  [isCompleted]="isCompletedSelectedDate"
+  [disabled]="isFutureSelectedDate"
+  (markDone)="onMarkDone()"
+>
 </app-daily-checkin>

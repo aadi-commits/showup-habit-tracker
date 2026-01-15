@@ -2,7 +2,13 @@
 
 <mat-card class="checkin-card">
   @if (!isCompleted) {
-  <button mat-raised-button color="primary" class="checkin-btn" (click)="onClick()">
+  <button
+    mat-raised-button
+    color="primary"
+    class="checkin-btn"
+    [disabled]="disabled"
+    (click)="onClick()"
+  >
     <mat-icon>check</mat-icon>
     Mark today as done
   </button>

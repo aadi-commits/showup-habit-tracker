@@ -43,6 +43,11 @@ export class Dashboard implements OnInit {
     console.log('🧪 completedDates BEFORE click:', this.completedDates);
     console.log('🧪 todayIso:', todayIso);
 
+    if (this.isFutureDate(this.selectedDate)) {
+      console.log('cannot mark future dates');
+      return;
+    }
+
     if (this.completedDates.includes(todayIso)) {
       console.log('ℹ️ Today already marked as done');
       return;
@@ -78,6 +83,13 @@ export class Dashboard implements OnInit {
     return streak;
   }
 
+  private isFutureDate(date: Date): boolean {
+    const today = new Date();
+    return this.toISO(date) > this.toISO(today);
+  }
+  get isFutureSelectedDate(): boolean {
+    return this.isFutureDate(this.selectedDate);
+  }
   //======================= Utils ===========================================
   private toISO(date: Date): string {
     const y = date.getFullYear();

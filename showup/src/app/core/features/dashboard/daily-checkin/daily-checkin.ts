@@ -12,10 +12,13 @@ import { CommonModule } from '@angular/common';
 })
 export class DailyCheckin {
   @Input() isCompleted = false;
+  @Input() disabled = false;
   @Output() markDone = new EventEmitter<void>();
 
   onClick() {
     console.log('✅ DailyCheckin: button clicked');
+
+    if (this.disabled) return;
     this.markDone.emit();
   }
 }
