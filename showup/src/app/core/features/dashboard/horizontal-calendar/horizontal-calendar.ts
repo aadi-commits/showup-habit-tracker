@@ -57,7 +57,7 @@ export class HorizontalCalendar implements OnInit, AfterViewInit {
 
     for (let day = 1; day <= totalDays; day++) {
       const date = new Date(year, month, day);
-      const iso = date.toISOString().split('T')[0];
+      const iso = this.toISO(date);
 
       this.days.push({
         date,
@@ -98,5 +98,12 @@ export class HorizontalCalendar implements OnInit, AfterViewInit {
       inline: 'center',
       block: 'nearest',
     });
+  }
+
+  private toISO(date: Date): string {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
   }
 }
