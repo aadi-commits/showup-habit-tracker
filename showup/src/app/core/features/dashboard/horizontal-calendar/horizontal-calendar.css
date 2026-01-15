@@ -1,51 +1,115 @@
+/* ===== Card ===== */
 .calendar-card {
-  margin: 8px 12px;
-  padding: 5px;
+  margin: 12px;
+  border-radius: 16px;
+  background: #fafafa;
+  position: relative;
+  overflow: hidden;
 }
 
-.month-title {
-  font-size: 14px;
-  font-weight: 600;
+/* Month title */
+.month-header {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  padding: 6px 8px 0;
 }
 
+/* ===== Scroll container ===== */
 .calendar-scroll {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 8px 0;
+  padding: 12px 8px 10px;
+
+  /* Hide scrollbar (cross-browser) */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
+/* ===== Day pill ===== */
 .day-btn {
-  /* border: 2px solid red !important; */
-  min-width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  padding: 0;
+  min-width: 64px;
+  height: 72px;
+  border-radius: 18px;
+  padding: 6px 0;
   flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+
   font-weight: 500;
+  line-height: 1;
 }
 
-.day-date{
-    display: flex;
-    flex-direction: column;
+/* Day name */
+.day-name {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-bottom: 4px;
 }
+
+/* Day number */
+.day-number {
+  font-size: 18px;
+}
+
+/* ===== Today ===== */
 .day-btn.today {
   border: 2px solid var(--mat-primary);
 }
 
+/* ===== Selected (FIXED VISIBILITY) ===== */
 .day-btn.selected {
-  box-shadow: inset 0 0 0 2px var(--mat-primary);
+  background: rgba(63, 81, 181, 0.12);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transform: scale(1.05);
 }
 
+.day-btn.selected .day-number {
+  color: var(--mat-primary);
+  font-weight: 700;
+}
+
+.day-btn.selected .day-name {
+  color: var(--mat-primary);
+  opacity: 0.8;
+}
+
+/* ===== Completed ===== */
 .day-btn.completed {
-  background-color: #4caf50;
-  color: #fff;
+  background: #e8f5e9;
+  color: #2e7d32;
 }
 
-.day-number {
-  line-height: 1;
+.done-icon {
+  font-size: 14px;
+  margin-top: 2px;
 }
 
-mat-icon {
-  font-size: 16px;
+/* ===== Scroll affordance (fade edges) ===== */
+.calendar-card::before,
+.calendar-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  z-index: 2;
+}
+
+.calendar-card::before {
+  left: 0;
+  background: linear-gradient(to right, #fafafa, transparent);
+}
+
+.calendar-card::after {
+  right: 0;
+  background: linear-gradient(to left, #fafafa, transparent);
 }
