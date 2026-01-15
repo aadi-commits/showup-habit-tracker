@@ -11,6 +11,11 @@ export class Showup {
 
   streak$ = this.streakSubject.asObservable();
 
+  initFromStorage(getStreak: () => number) {
+    const streak = getStreak();
+    this.streakSubject.next(streak);
+  }
+
   setStreak(streak: number) {
     this.streakSubject.next(streak);
   }

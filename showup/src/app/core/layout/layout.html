@@ -1,13 +1,11 @@
 <!-- <h1>Layout Works</h1> -->
- <app-top-toolbar
-    [currentStreak]="currentStreak"
-    [today]="today"
-    (settingsClick)="openSettings()"
-    >
+<app-top-toolbar
+  [currentStreak]="(streak$ | async) ?? 0"
+  [today]="today"
+  (settingsClick)="openSettings()"
+>
 </app-top-toolbar>
 
 <main class="layout-content">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </main>
-
-

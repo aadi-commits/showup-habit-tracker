@@ -24,8 +24,10 @@ export class Dashboard implements OnInit {
 
     this.completedDates = this.showupService.loadCompletedDates();
 
-    const streak = this.currentStreak;
-    this.showupService.setStreak(streak);
+    queueMicrotask(() => {
+      const streak = this.currentStreak;
+      this.showupService.setStreak(streak);
+    });
   }
 
   onDateSelected(date: Date) {
