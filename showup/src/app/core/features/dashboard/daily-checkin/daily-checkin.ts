@@ -16,7 +16,7 @@ export class DailyCheckin {
   @Output() markDone = new EventEmitter<void>();
 
   onClick() {
-    console.log('✅ DailyCheckin: button clicked');
+    // console.log('✅ DailyCheckin: button clicked');
 
     if (this.disabled) return;
     this.markDone.emit();

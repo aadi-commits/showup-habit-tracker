@@ -24,12 +24,12 @@ export class Layout implements OnInit {
   ngOnInit(): void {
     this.showupService.streak$.subscribe((streak) => {
       this.streak$ = this.showupService.streak$;
-      console.log('toolbar streak updated:', streak);
+      // console.log('toolbar streak updated:', streak);
     });
   }
 
   openSettings() {
-    console.log('Settings clicked from layout');
+    // console.log('Settings clicked from layout');
   }
 
   updateStreak(streak: number) {

@@ -26,6 +26,6 @@ export class App {
   protected readonly title = signal('showup');
 
   constructor() {
-    console.log('Production mode: ', environment.production);
+    // console.log('Production mode: ', environment.production);
   }
 }
