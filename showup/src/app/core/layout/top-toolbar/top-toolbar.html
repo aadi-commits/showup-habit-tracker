@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="top-toolbar">
+
+    <span class="app-name">ShowUp</span>
+
+    <span class="spacer"></span>
+
+    <span class="date">{{ today | date: 'EEE, d MMM' }}</span>
+
+    <div class="right-group">
+        <span class="streak">🔥 {{ currentStreak }}</span>
+
+        <button mat-icon-button (click)="settingsClick.emit()">
+            <mat-icon>settings</mat-icon>
+        </button>
+    </div>
+    
+</mat-toolbar>
+

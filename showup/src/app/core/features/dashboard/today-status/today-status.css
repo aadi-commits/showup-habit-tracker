@@ -1,0 +1,47 @@
+.status-card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 12px;
+  border-radius: 16px;
+  border: none;
+  background: #ffffff;
+}
+
+/* Shared layout */
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+}
+
+/* Icon */
+.status-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Text */
+.text .title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.text .subtitle {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Pending state */
+.status.pending {
+  color: #ff9800;
+}
+
+/* Completed state */
+.status.success {
+  color: #4caf50;
+}

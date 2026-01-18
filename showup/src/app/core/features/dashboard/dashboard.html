@@ -1,0 +1,14 @@
+<!-- <p>dashboard works!</p> -->
+<app-horizontal-calendar
+  [completedDates]="completedDates"
+  (dateSelected)="onDateSelected($event)"
+></app-horizontal-calendar>
+
+<app-today-status [isCompletedToday]="isCompletedSelectedDate"></app-today-status>
+
+<app-daily-checkin
+  [isCompleted]="isCompletedSelectedDate"
+  [disabled]="isFutureSelectedDate"
+  (markDone)="onMarkDone()"
+>
+</app-daily-checkin>

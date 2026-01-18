@@ -1,0 +1,23 @@
+<!-- <p>today-status works!</p> -->
+
+<mat-card class="status-card">
+  @if(isCompletedToday){
+  <div class="status success">
+    <mat-icon class="status-icon">check_circle</mat-icon>
+
+    <div class="text">
+      <div class="title">You’re done for today!</div>
+      <div class="subtitle">Great job showing up 🎉</div>
+    </div>
+  </div>
+  }@else {
+  <div class="status pending">
+    <mat-icon class="status-icon">hourglass_empty</mat-icon>
+
+    <div class="text">
+      <div class="title">Not done yet</div>
+      <div class="subtitle">One small step is enough today</div>
+    </div>
+  </div>
+  }
+</mat-card>
