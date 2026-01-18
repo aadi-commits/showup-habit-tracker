@@ -42,27 +42,27 @@ export class Dashboard implements OnInit {
   onMarkDone() {
     const today = new Date();
     const todayIso = this.toISO(today);
-    console.log('🧪 completedDates BEFORE click:', this.completedDates);
-    console.log('🧪 todayIso:', todayIso);
+    // console.log('🧪 completedDates BEFORE click:', this.completedDates);
+    // console.log('🧪 todayIso:', todayIso);
 
     if (this.isFutureDate(this.selectedDate)) {
-      console.log('cannot mark future dates');
+      // console.log('cannot mark future dates');
       return;
     }
 
     if (this.completedDates.includes(todayIso)) {
-      console.log('ℹ️ Today already marked as done');
+      // console.log('ℹ️ Today already marked as done');
       return;
     }
 
     this.completedDates = [...this.completedDates, todayIso];
     this.showupService.saveCompletedDates(this.completedDates);
-    console.log('✅ Marked today as done:', todayIso);
+    // console.log('✅ Marked today as done:', todayIso);
 
     this.selectedDate = today;
 
     const streak = this.currentStreak;
-    console.log('📈 Dashboard calculated streak:', streak);
+    // console.log('📈 Dashboard calculated streak:', streak);
 
     this.showupService.setStreak(streak);
   }
