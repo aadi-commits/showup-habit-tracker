@@ -3,18 +3,27 @@ import { HorizontalCalendar } from './horizontal-calendar/horizontal-calendar';
 import { TodayStatus } from './today-status/today-status';
 import { DailyCheckin } from './daily-checkin/daily-checkin';
 import { Showup } from '../../services/showup';
+import { HabitSection } from "../dashboad/habit-section/habit-section";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [HorizontalCalendar, TodayStatus, DailyCheckin],
+  imports: [HorizontalCalendar, TodayStatus, DailyCheckin, HabitSection],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
 export class Dashboard implements OnInit {
+  private readonly HABIT_STATE_KEY = 'daily_habits_persistent';
+  private readonly LAST_OPEN_DATE_KEY = 'last_habit_open_date';
   selectedDate!: Date;
   completedDates: string[] = [
     // example
     // '2026-01-14',
+  ];
+
+  dailyBasics = [
+    { id: 'water', label: 'Drink Water', completed: false },
+    { id: 'sunlight', label: 'Get Sunlight', completed: false },
+    { id: 'walk', label: 'Walk', completed: false },
   ];
 
   constructor(private showupService: Showup) {}
@@ -28,6 +37,9 @@ export class Dashboard implements OnInit {
       const streak = this.currentStreak;
       this.showupService.setStreak(streak);
     });
+
+    this.resetIfNewDay();
+    this.loadHabits();
   }
 
   onDateSelected(date: Date) {
@@ -89,9 +101,66 @@ export class Dashboard implements OnInit {
     const today = new Date();
     return this.toISO(date) > this.toISO(today);
   }
+
   get isFutureSelectedDate(): boolean {
     return this.isFutureDate(this.selectedDate);
   }
+
+  onDailybasicToggle(id: string){
+    // console.log('inside basic toggle...')
+    this.dailyBasics = this.dailyBasics.map(habit => 
+      habit.id == id 
+      ? { ...habit, completed: !habit.completed }
+      : habit
+    );
+
+    this.persistHabits();
+  }
+
+  loadHabits() {
+    // console.log('inside load habits')
+    const raw = localStorage.getItem('daily_habits_persistent');
+    const saved = raw ? JSON.parse(raw) : {};
+
+    this.dailyBasics = this.dailyBasics.map(habit => ({
+      ...habit,
+      completed: saved[habit.id] ?? habit.completed,
+    }));
+  }
+
+
+  persistHabits(){
+    // console.log('inside basic persist habit...')
+    const record = this.dailyBasics.reduce((acc, habit) => {
+      acc[habit.id] = habit.completed;
+      return acc;
+    }, {} as Record<string, boolean>)
+
+    localStorage.setItem('daily_habits_persistent', JSON.stringify(record));
+  }
+
+  private getTodayKey(): string {
+    return this.toISO(new Date());
+  }
+  resetIfNewDay() {
+    const today = this.getTodayKey();
+    const lastOpen = localStorage.getItem(this.LAST_OPEN_DATE_KEY);
+
+    if (lastOpen && lastOpen !== today) {
+      // New day → reset habits
+      this.dailyBasics = this.dailyBasics.map(habit => ({
+        ...habit,
+        completed: false,
+      }));
+
+      // Persist the reset state
+      this.persistHabits();
+    }
+
+    // Update last open date
+    localStorage.setItem(this.LAST_OPEN_DATE_KEY, today);
+  }
+
   //======================= Utils ===========================================
   private toISO(date: Date): string {
     const y = date.getFullYear();
