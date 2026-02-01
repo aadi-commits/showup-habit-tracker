@@ -12,3 +12,9 @@
   (markDone)="onMarkDone()"
 >
 </app-daily-checkin>
+
+<app-habit-section
+  title="Daily Basics"
+  [habits]="dailyBasics"
+  (toggleHabit)="onDailybasicToggle($event)">
+</app-habit-section>

@@ -1,0 +1,21 @@
+<div class="habit-section">
+  <div class="header" (click)="toggleSection()">
+    <span class="title">{{ title }}</span>
+    <span class="arrow">{{ isExpanded ? '▾' : '▸' }}</span>
+  </div>
+
+  @if (isExpanded) {
+    <div class="body">
+      @for (habit of habits; track habit.id) {
+        <div class="habit-row">
+          <input
+            type="checkbox"
+            [checked]="habit.completed"
+            (change)="onHabitToggle(habit.id)"
+          />
+          <span class="label">{{ habit.label }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>
